@@ -1,5 +1,5 @@
-import 'package:fultter_assigment_bank_mas/common/app_asset.dart';
-import 'package:fultter_assigment_bank_mas/common/app_style.dart';
+import 'package:flutter_assigment_bank_mas/common/app_asset.dart';
+import 'package:flutter_assigment_bank_mas/common/app_style.dart';
 import 'package:flutter/material.dart';
 
 

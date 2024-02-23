@@ -4,12 +4,12 @@ class RetryDialog extends StatelessWidget {
   const RetryDialog(
       {Key? key,
       required this.title,
-      required this.onRetryPressed,
+      required this.onClosePressed,
       this.onCancelPressed})
       : super(key: key);
 
   final String title;
-  final VoidCallback onRetryPressed;
+  final VoidCallback onClosePressed;
   final VoidCallback? onCancelPressed;
 
   @override
@@ -40,15 +40,9 @@ class RetryDialog extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              TextButton(
-                onPressed: onCancelPressed ??
-                    () => Navigator.pop(context),
-                child: const Text("Cancel"),
-              ),
-              const SizedBox(width: 15),
               ElevatedButton(
-                onPressed: onRetryPressed,
-                child: const Text("Retry"),
+                onPressed: onClosePressed,
+                child: const Text("Close"),
               ),
             ],
           )

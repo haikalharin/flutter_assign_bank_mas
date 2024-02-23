@@ -2,7 +2,7 @@
 
 import 'dart:io' show SocketException;
 
-import 'package:fultter_assigment_bank_mas/common/app_string.dart';
+import 'package:flutter_assigment_bank_mas/common/app_string.dart';
 import 'package:dio/dio.dart' show DioError, DioErrorType;
 
 class DioExceptions implements Exception {

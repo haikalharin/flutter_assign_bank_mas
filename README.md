@@ -1,4 +1,4 @@
-# fultter_assigment_bank_mas
+# flutter_assigment_bank_mas
 
 A new Flutter project.
 use flutter 3.13.1

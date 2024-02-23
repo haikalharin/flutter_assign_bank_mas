@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:fultter_assigment_bank_mas/common/app_extension.dart';
+import 'package:flutter_assigment_bank_mas/common/app_extension.dart';
 import 'package:dio/dio.dart';
 
 import '../../data/models/response_model/response_model.dart';

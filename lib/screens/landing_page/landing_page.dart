@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_assigment_bank_mas/core/network/network_info.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
@@ -19,6 +20,8 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
+  final GlobalKey<_LandingPageState> myWidgetKey = GlobalKey();
+
   Future<void> _openURL(Uri url) async {
     await canLaunchUrl(url)
         ? await launchUrl(url)
@@ -47,12 +50,10 @@ class _LandingPageState extends State<LandingPage> {
           if (state.submitStatus.isFailure) {
             showDialog(
                 context: context,
-                builder: (BuildContext context) => RetryDialog(
+                builder: (BuildContext context) =>
+                    RetryDialog(
                       title: state.failureMessage ?? '',
-                      onCancelPressed: () => [
-                        Navigator.pop(context),
-                      ],
-                      onRetryPressed: () {
+                      onClosePressed: () {
                         return Navigator.pop(context);
                       },
                     ));
@@ -61,19 +62,17 @@ class _LandingPageState extends State<LandingPage> {
         child: BlocBuilder<LandingPageBloc, LandingPageState>(
           builder: (context, state) {
             return LiquidPullToRefresh(
-              onRefresh:_handleRefresh,
+              onRefresh: _handleRefresh,
               child: ListView(
                 children: [
                   Card(
-                    margin:
-                        EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                    margin: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                     child: Container(
                       height: 200.h,
                       margin: EdgeInsets.all(8.0),
                       child: GridView.builder(
                         physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate:
-                            SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
                         ),
                         itemCount: state.gridView?.items?.length,
@@ -81,33 +80,54 @@ class _LandingPageState extends State<LandingPage> {
                           return Stack(
                             children: [
                               InkWell(
-                                onTap: () {
-                                  Navigator.pushNamed(context, Routes.webViewPage,
-                                      arguments: {
-                                        'url':
-                                            state.gridView?.items?[index].link ??
-                                                '-',
-                                        'title': state.gridView?.items?[index]
-                                                .productName ??
-                                            '-'
-                                      });
+                                onTap: () async {
+                                  if (await NetworkInfoImpl().isConnected) {
+                                    Navigator.pushNamed(
+                                        myWidgetKey.currentContext ?? context,
+                                        Routes.webViewPage,
+                                        arguments: {
+                                          'url': state.gridView?.items?[index]
+                                              .link ??
+                                              '-',
+                                          'title': state.gridView?.items?[index]
+                                              .productName ??
+                                              '-'
+                                        });
+                                  } else {
+                                    showDialog(
+                                        context: myWidgetKey.currentContext ??
+                                            context,
+                                        builder: (BuildContext context) =>
+                                            RetryDialog(
+                                              title: 'No Connection',
+                                              onClosePressed: () {
+                                                return Navigator.pop(context);
+                                              },
+                                            ));
+                                  }
                                 },
                                 child: Container(
                                   margin: EdgeInsets.all(8.0),
                                   color: Colors.white,
                                   child: Column(
                                     children: [
-                                      Image.network(
+                                      state.gridView != null
+                                          ? Image.network(
                                         state.gridView?.items?[index]
-                                                .productImage ??
+                                            .productImage ??
                                             'https://via.placeholder.com/150',
+                                        height: 50.h,
+                                        fit: BoxFit.cover,
+                                      )
+                                          : Image.asset(
+                                        'assets/Image_not_available.png',
                                         height: 50.h,
                                         fit: BoxFit.cover,
                                       ),
                                       SizedBox(height: 8),
                                       Text(
                                         state.gridView?.items?[index]
-                                                .productName ??
+                                            .productName ??
                                             '-',
                                         style: TextStyle(
                                           fontSize: 12.sp,
@@ -148,26 +168,42 @@ class _LandingPageState extends State<LandingPage> {
                     ),
                   ),
                   Container(
-                    height: MediaQuery.of(context).size.height - 200,
+                    height: MediaQuery
+                        .of(context)
+                        .size
+                        .height - 200,
                     margin: EdgeInsets.all(8.0),
                     child: Stack(
                       children: [
-
                         ListView.builder(
                           itemCount: state.listView?.items?.length,
                           itemBuilder: (BuildContext context, int index) {
                             return InkWell(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, Routes.webViewPage,
-                                    arguments: {
-                                      'url': state
-                                              .listView?.items?[index].link ??
-                                          '-',
-                                      'title': state.listView?.items?[index]
-                                              .articleTitle ??
-                                          '-'
-                                    });
+                              onTap: () async {
+                                if (await NetworkInfoImpl().isConnected) {
+                                  Navigator.pushNamed(
+                                      myWidgetKey.currentContext ?? context,
+                                      Routes.webViewPage,
+                                      arguments: {
+                                        'url': state
+                                            .listView?.items?[index].link ??
+                                            '-',
+                                        'title': state.listView?.items?[index]
+                                            .articleTitle ??
+                                            '-'
+                                      });
+                                } else {
+                                  showDialog(
+                                      context:
+                                      myWidgetKey.currentContext ?? context,
+                                      builder: (BuildContext context) =>
+                                          RetryDialog(
+                                            title: 'No Connection',
+                                            onClosePressed: () {
+                                              return Navigator.pop(context);
+                                            },
+                                          ));
+                                }
                               },
                               child: Card(
                                 shape: RoundedRectangleBorder(
@@ -175,21 +211,29 @@ class _LandingPageState extends State<LandingPage> {
                                 ),
                                 margin: EdgeInsets.symmetric(vertical: 16),
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start ,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Container(
-                                      width:
-                                      MediaQuery.sizeOf(context).width,
+                                      width: MediaQuery
+                                          .sizeOf(context)
+                                          .width,
                                       height: 150.h,
                                       decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: NetworkImage(
-                                              state.listView?.items?[index]
-                                                  .articleImage ??
-                                                  'https://via.placeholder.com/150'),
+                                        image: state.listView != null &&
+                                            state.listView?.items?[index]
+                                                .articleImage != null
+                                            ? DecorationImage(
+                                          image: NetworkImage(state
+                                              .listView
+                                              ?.items?[index]
+                                              .articleImage ??
+                                              'https://via.placeholder.com/150'),
+                                          fit: BoxFit.cover,
+                                        ): const DecorationImage(
+                                          image: AssetImage(
+                                              'assets/Image_not_available.png'),
                                           fit: BoxFit.cover,
                                         ),
-
                                         borderRadius: const BorderRadius.only(
                                           topLeft: Radius.circular(16),
                                           topRight: Radius.circular(16),
@@ -198,10 +242,11 @@ class _LandingPageState extends State<LandingPage> {
                                     ),
                                     SizedBox(height: 8),
                                     Container(
-                                      margin: EdgeInsets.symmetric(horizontal: 16,vertical: 8),
+                                      margin: EdgeInsets.symmetric(
+                                          horizontal: 16, vertical: 8),
                                       child: Text(
                                         state.listView?.items?[index]
-                                                .articleTitle ??
+                                            .articleTitle ??
                                             '-',
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
@@ -218,17 +263,16 @@ class _LandingPageState extends State<LandingPage> {
                           },
                         ),
                         BlocBuilder<LandingPageBloc, LandingPageState>(
-                              builder: (context, state) {
-                                return state.submitStatus.isInProgress
-                                    ? Container(
-                                  color: Colors.white,
-                                      child: const SpinKitIndicator(
-                                      type: SpinKitType.circle),
-                                    )
-                                    : Container();
-                              },
-                            ),
-
+                          builder: (context, state) {
+                            return state.submitStatus.isInProgress
+                                ? Container(
+                              color: Colors.white,
+                              child: const SpinKitIndicator(
+                                  type: SpinKitType.circle),
+                            )
+                                : Container();
+                          },
+                        ),
                       ],
                     ),
                   ),

@@ -1,5 +1,5 @@
-import 'package:fultter_assigment_bank_mas/core/network/api_result.dart';
-import 'package:fultter_assigment_bank_mas/core/network/dio_exception.dart';
+import 'package:flutter_assigment_bank_mas/core/network/api_result.dart';
+import 'package:flutter_assigment_bank_mas/core/network/dio_exception.dart';
 import 'package:dio/dio.dart';
 
 mixin RepositoryHelper<T> {

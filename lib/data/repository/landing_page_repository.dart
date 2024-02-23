@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:fultter_assigment_bank_mas/data/models/landing_page_model/landing_page_model.dart';
-import 'package:fultter_assigment_bank_mas/data/remote_data_source/landing_page_api.dart';
+import 'package:flutter_assigment_bank_mas/data/models/landing_page_model/landing_page_model.dart';
+import 'package:flutter_assigment_bank_mas/data/remote_data_source/landing_page_api.dart';
 
 import '../../../core/network/api_result.dart';
 import '../../../core/network/dio_exception.dart';

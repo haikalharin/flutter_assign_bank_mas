@@ -4,8 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:formz/formz.dart';
-import 'package:fultter_assigment_bank_mas/data/models/landing_page_model/landing_page_model.dart';
-import 'package:fultter_assigment_bank_mas/data/repository/landing_page_repository.dart';
+import 'package:flutter_assigment_bank_mas/data/models/landing_page_model/landing_page_model.dart';
+import 'package:flutter_assigment_bank_mas/data/repository/landing_page_repository.dart';
 import 'package:meta/meta.dart';
 
 part 'landing_page_event.dart';
@@ -42,6 +42,9 @@ class LandingPageBloc extends Bloc<LandingPageEvent, LandingPageState> {
               submitStatus: FormzSubmissionStatus.success));
         }, failure: (error) {
           emit(state.copyWith(
+              landingPageModel: null ,
+              gridView: null,
+              listView: null,
             failureMessage: error,
               submitStatus: FormzSubmissionStatus.failure));
         });

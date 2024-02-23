@@ -1,12 +1,12 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formz/formz.dart';
-import 'package:fultter_assigment_bank_mas/core/network/api_result.dart';
-import 'package:fultter_assigment_bank_mas/data/models/landing_page_model/landing_page_model.dart';
-import 'package:fultter_assigment_bank_mas/data/models/response_model/response_model.dart';
-import 'package:fultter_assigment_bank_mas/data/repository/landing_page_repository.dart';
-import 'package:fultter_assigment_bank_mas/main.dart';
-import 'package:fultter_assigment_bank_mas/screens/landing_page/bloc/landing_page_bloc.dart';
+import 'package:flutter_assigment_bank_mas/core/network/api_result.dart';
+import 'package:flutter_assigment_bank_mas/data/models/landing_page_model/landing_page_model.dart';
+import 'package:flutter_assigment_bank_mas/data/models/response_model/response_model.dart';
+import 'package:flutter_assigment_bank_mas/data/repository/landing_page_repository.dart';
+import 'package:flutter_assigment_bank_mas/main.dart';
+import 'package:flutter_assigment_bank_mas/screens/landing_page/bloc/landing_page_bloc.dart';
 import 'package:mockito/mockito.dart';
 
 var dataException = null;

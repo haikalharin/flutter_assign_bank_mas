@@ -1,4 +1,4 @@
-import 'package:fultter_assigment_bank_mas/data/models/landing_page_model/landing_page_model.dart';
+import 'package:flutter_assigment_bank_mas/data/models/landing_page_model/landing_page_model.dart';
 
 import '../../../core/network/api_helper.dart';
 import '../../../core/network/dio_client.dart';

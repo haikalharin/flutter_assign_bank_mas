@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "fultter_assigment_bank_mas" "\0"
+            VALUE "FileDescription", "flutter_assigment_bank_mas" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "fultter_assigment_bank_mas" "\0"
+            VALUE "InternalName", "flutter_assigment_bank_mas" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "fultter_assigment_bank_mas.exe" "\0"
-            VALUE "ProductName", "fultter_assigment_bank_mas" "\0"
+            VALUE "OriginalFilename", "flutter_assigment_bank_mas.exe" "\0"
+            VALUE "ProductName", "flutter_assigment_bank_mas" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

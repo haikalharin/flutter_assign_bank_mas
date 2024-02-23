@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fultter_assigment_bank_mas/core/router/routes.dart';
-import 'package:fultter_assigment_bank_mas/screens/landing_page/landing_page.dart';
-import 'package:fultter_assigment_bank_mas/screens/webview_page/webview_page.dart';
+import 'package:flutter_assigment_bank_mas/core/router/routes.dart';
+import 'package:flutter_assigment_bank_mas/screens/landing_page/landing_page.dart';
+import 'package:flutter_assigment_bank_mas/screens/webview_page/webview_page.dart';
 
 import '../../utils/remote_utils.dart';
 

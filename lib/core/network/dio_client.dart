@@ -1,5 +1,5 @@
-import 'package:fultter_assigment_bank_mas/core/network/api_config.dart';
-import 'package:fultter_assigment_bank_mas/core/network/dio_interceptor.dart';
+import 'package:flutter_assigment_bank_mas/core/network/api_config.dart';
+import 'package:flutter_assigment_bank_mas/core/network/dio_interceptor.dart';
 import 'package:dio/dio.dart' show Dio, ResponseType;
 
 
